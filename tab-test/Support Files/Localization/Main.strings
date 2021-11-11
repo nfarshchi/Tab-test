@@ -1,0 +1,21 @@
+/* 
+  Main.strings
+  tab-test
+
+  Created by Navid on 11/11/21.
+  
+*/
+
+// LandingView
+"landing-view.score" = "Score";
+"landing-view.play.cta.title" = "Play";
+
+// QuestionView
+"question-view.title" = "Question %@";
+"question-view.cta.dismiss" = "Done";
+"question-view.cta.answer.option-a" = "True";
+"question-view.cta.answer.option-b" = "False";
+"question-view.result" = "Your answer is %@";
+"question-view.result.correct" = "right";
+"question-view.result.wrong" = "wrong";
+"question-view.cta.next" = "Next Question";

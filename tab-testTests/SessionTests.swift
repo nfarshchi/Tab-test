@@ -1,14 +1,13 @@
 //
-//  tab_testTests.swift
+//  SessionTests.swift
 //  tab-testTests
 //
 //  Created by Navid on 11/11/21.
 //
 
 import XCTest
-@testable import tab_test
 
-class tab_testTests: XCTestCase {
+class SessionTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -30,6 +29,7 @@ class tab_testTests: XCTestCase {
         }
     }
     
-    
+    // fuck test add score
+    // test current score
 
 }

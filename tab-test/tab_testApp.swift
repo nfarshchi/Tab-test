@@ -11,7 +11,7 @@ import SwiftUI
 struct tab_testApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LandingView(viewModel: .init(session: Session()))
         }
     }
 }
