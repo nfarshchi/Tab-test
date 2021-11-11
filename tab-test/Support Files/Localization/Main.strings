@@ -11,7 +11,7 @@
 "landing-view.play.cta.title" = "Play";
 
 // QuestionView
-"question-view.title" = "Question %@";
+"question-view.title" = "Question %d";
 "question-view.cta.dismiss" = "Done";
 "question-view.cta.answer.option-a" = "True";
 "question-view.cta.answer.option-b" = "False";

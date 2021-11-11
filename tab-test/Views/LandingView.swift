@@ -27,24 +27,33 @@ struct LandingView: View {
                 .font(.title)
             Spacer()
             Button {
-                print("show question page")
+                viewModel.startQuize()
             } label: {
                 Text(Strings.LandingView.play.localized)
                     .font(.title)
             }
             Spacer()
+        }.fullScreenCover(isPresented: $viewModel.showQuestionsView) {
+            QuestionView(viewModel: .init(session: viewModel.session))
         }
     }
     
     class ViewModel: ObservableObject {
+        
+        @Published var showQuestionsView: Bool = false
+        
         let session: Session
         init(session: Session) {
             self.session = session
         }
+        
+        func startQuize() {
+            self.showQuestionsView.toggle()
+        }
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct LandingView_Previews: PreviewProvider {
     static var previews: some View {
         LandingView(viewModel: .init(session: Session()))
     }
