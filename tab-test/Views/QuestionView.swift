@@ -9,50 +9,78 @@ import SwiftUI
 import Combine
 
 struct QuestionView: View {
-    @Environment(\.presentationMode) private var presentationMode
-    @ObservedObject private var viewModel: ViewModel
+    typealias Rs = Strings.QuestionView
     
-    init(viewModel: ViewModel) {
+    @Environment(\.presentationMode) private var presentationMode
+    @ObservedObject private var viewModel: QuestionViewModel
+    
+    init(viewModel: QuestionViewModel) {
         self.viewModel = viewModel
     }
     
     var body: some View {
         NavigationView {
             VStack {
-                HStack {
-                    Text("hee")
-                }
+                Spacer()
+                questionBlock
+                Spacer()
+                answerStatusBlock
             }
+            .padding()
             .navigationTitle(viewModel.title)
             .navigationBarTitleDisplayMode(.inline)
+            .navigationBarHidden(viewModel.state == .finished)
             .navigationBarItems(trailing: Button (action: {
                 self.presentationMode.wrappedValue.dismiss() },
-                                label: {
-                Text(Strings.QuestionView.dismissCTA.localized)
+                                                  label: {
+                Text(Rs.dismissCTA.localized)
             }))
+        }.alert(isPresented: .constant(viewModel.showFinishedState)) {
+            Alert(title: Text(Rs.EndGameMessage.title.localized),
+                  message: Text(Rs.EndGameMessage.body.localized),
+                  dismissButton:
+                        .cancel(Text(Rs.EndGameMessage.finishCTA.localized)) {
+                self.presentationMode.wrappedValue.dismiss()
+            }
+            )
         }
     }
     
-    class ViewModel: ObservableObject {
-        let session: Session
-        @Published private(set) var currentQuestionIndex: Int = 0
-        @Published private(set) var title: String = ""
-        private var bag: [AnyCancellable] = []
-        
-        init(session: Session) {
-            self.session = session
-            self.bindScreenValues()
-        }
-        
-        deinit {
-            bag.removeAll()
-        }
-        
-        private func bindScreenValues() {
-            $currentQuestionIndex.sink { [weak self] index in
-                self?.title = String(format: Strings.QuestionView.title.localized, (index + 1))
-            }.store(in: &bag)
-        }
+    var questionBlock: some View {
+        VStack(alignment: .leading, spacing: Gutter.xlarge) {
+            Text(viewModel.questionTitle)
+            
+            HStack {
+                Button {
+                    viewModel.answerdWith(option: .optionTrue)
+                } label: {
+                    Text(Rs.answerCTAOptionTrue.localized)
+                        .font(.title)
+                }
+                Spacer()
+                Button {
+                    viewModel.answerdWith(option: .optionFalse)
+                } label: {
+                    Text(Rs.answerCTAOptionFalse.localized)
+                        .font(.title)
+                }
+            }
+            .hidden(!self.viewModel.showAnsweringBlock)
+            
+        }.padding(Gutter.xlarge)
+    }
+    
+    var answerStatusBlock: some View {
+        VStack(alignment: .center, spacing: Gutter.xlarge) {
+            Text(viewModel.answerStatusTitle)
+            Button {
+                self.viewModel.nextQuestion()
+            } label: {
+                Text(Rs.nextCTA.localized)
+                    .font(.title)
+            }
+        }.padding()
+            .hidden(!self.viewModel.showAnswerStatusBlock)
     }
 }
 

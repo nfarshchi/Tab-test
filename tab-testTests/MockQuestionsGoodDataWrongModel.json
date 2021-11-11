@@ -1,0 +1,9 @@
+{
+    "domain": "swift",
+    "blabla": [
+        {
+            "foo": "Extensions must not contain stored properties?",
+            "answer": true
+        }
+    ]
+}

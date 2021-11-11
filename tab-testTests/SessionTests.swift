@@ -6,30 +6,47 @@
 //
 
 import XCTest
+@testable import tab_test
 
 class SessionTests: XCTestCase {
-
+    
+    var mockSession = Session()
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        mockSession = Session()
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    // MARK: Score tests
+    func testInitialScore() {
+        XCTAssertEqual(mockSession.currentScore, 0)
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func testAddScoreWithTrueAnswer() {
+        mockSession.shouldIncreaseScore(answer: true)
+        XCTAssertEqual(mockSession.currentScore, 1)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    
+    func testAddScoreWithFalseAnswer() {
+        mockSession.shouldIncreaseScore(answer: false)
+        XCTAssertEqual(mockSession.currentScore, 0)
+    }
+    
+    func testResetScore() {
+        mockSession.currentScore = 10
+        XCTAssertNotEqual(mockSession.currentScore, 0)
+        mockSession.resetScore()
+        XCTAssertEqual(mockSession.currentScore, 0)
+    }
+    
+    // MARK: Read Questions From local file
+    func testReadDataWithWrongFileName() {
+        let testBundle = Bundle(for: type(of: self))
+        do {
+            try mockSession.loadQuestions(with: "wrongFile", bundle: testBundle)
+        } catch {
+            XCTAssertEqual(error as! DataError, DataError.fileNotFound)
         }
     }
     
-    // fuck test add score
-    // test current score
-
+    // TODO: Good to have tests for corrupted files or not matching model object
 }

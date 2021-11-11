@@ -17,6 +17,9 @@ struct Gutter {
 }
 
 // MARK: String keys
+/// TODO: There is a library RSwift which read the localization strings and create
+///       these keys, for this project I didnt want to use thirdparty library so I created them here manually
+///
 struct Strings {
     struct LandingView {
         static let score = "landing-view.score"
@@ -26,14 +29,21 @@ struct Strings {
     struct QuestionView {
         static let title = "question-view.title"
         static let dismissCTA = "question-view.cta.dismiss"
-        static let answerCTAOptionA = "question-view.cta.answer.option-a"
-        static let answerCTAOptionB = "question-view.cta.answer.option-b"
+        static let answerCTAOptionTrue = "question-view.cta.answer.option-true"
+        static let answerCTAOptionFalse = "question-view.cta.answer.option-false"
+        static let nextCTA = "question-view.cta.next"
         
         struct Result {
             static let title = "question-view.result"
             static let correct = "question-view.result.correct"
             static let wrong = "question-view.result.wrong"
             static let nextCTA = "question-view.cta.next"
+        }
+        
+        struct EndGameMessage {
+            static let title = "end-message.title"
+            static let body = "end-message.body"
+            static let finishCTA = "end-message.cta.finish"
         }
     }
 }

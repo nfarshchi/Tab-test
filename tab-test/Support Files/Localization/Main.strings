@@ -13,9 +13,15 @@
 // QuestionView
 "question-view.title" = "Question %d";
 "question-view.cta.dismiss" = "Done";
-"question-view.cta.answer.option-a" = "True";
-"question-view.cta.answer.option-b" = "False";
+"question-view.cta.answer.option-true" = "True";
+"question-view.cta.answer.option-false" = "False";
 "question-view.result" = "Your answer is %@";
 "question-view.result.correct" = "right";
 "question-view.result.wrong" = "wrong";
 "question-view.cta.next" = "Next Question";
+
+// End Of Game
+"end-message.title" = "Good Job";
+"end-message.body" = "You have answered all questions";
+"end-message.cta.finish" = "Finish";
+

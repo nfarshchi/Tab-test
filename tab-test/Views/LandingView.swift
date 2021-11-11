@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct LandingView: View {
-    @ObservedObject private var viewModel: ViewModel
+    typealias Rs = Strings.LandingView
     
-    init(viewModel: ViewModel) {
+    @ObservedObject private var viewModel: LandingViewModel
+    
+    init(viewModel: LandingViewModel) {
         self.viewModel = viewModel
     }
     
@@ -18,7 +20,7 @@ struct LandingView: View {
         VStack(alignment: .center, spacing: Gutter.normal) {
             Spacer()
             
-            Text(Strings.LandingView.score.localized)
+            Text(Rs.score.localized)
                 .fontWeight(.bold)
                 .font(.largeTitle)
                 .padding(.bottom, Gutter.xlarge)
@@ -29,26 +31,12 @@ struct LandingView: View {
             Button {
                 viewModel.startQuize()
             } label: {
-                Text(Strings.LandingView.play.localized)
+                Text(Rs.play.localized)
                     .font(.title)
             }
             Spacer()
         }.fullScreenCover(isPresented: $viewModel.showQuestionsView) {
             QuestionView(viewModel: .init(session: viewModel.session))
-        }
-    }
-    
-    class ViewModel: ObservableObject {
-        
-        @Published var showQuestionsView: Bool = false
-        
-        let session: Session
-        init(session: Session) {
-            self.session = session
-        }
-        
-        func startQuize() {
-            self.showQuestionsView.toggle()
         }
     }
 }
