@@ -1,5 +1,6 @@
 # Tab-test
-A simple project as technical test for TabCorp. The assessment file is here. 
+A simple project as technical test for TabCorp. The assessment file [is here](https://github.com/nfarshchi/Tab-test/files/7522049/iOS.Assessment.pdf).
+
 
 ## Configuration
 - XCODE 13.1
